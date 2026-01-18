@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SSLC Model Question Papers 2026</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* ================= THEME ================= */
+:root {
+  --bg: #020617;
+  --overlay: rgba(2,6,23,0.8);
+  --card: #ffffff;
+  --text: #e5e7eb;
+  --accent: #facc15;
+  --border: #facc15;
+  --intro-bg: radial-gradient(circle at top, #0f172a, #020617);
+}
+
+.light {
+  --bg: #f8fafc;
+  --overlay: rgba(248,250,252,0.85);
+  --card: #ffffff;
+  --text: #020617;
+  --accent: #2563eb;
+  --border: #2563eb;
+  --intro-bg: radial-gradient(circle at top, #e0e7ff, #f8fafc);
+}
+
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    linear-gradient(var(--overlay), var(--overlay)),
+    url("https://images.unsplash.com/photo-1524995997946-a1c2e315a42f");
+  background-size: cover;
+  background-position: center;
+  color: var(--text);
+  transition: 0.4s;
+}
+
+/* ================= INTRO ================= */
+#intro {
+  position: fixed;
+  inset: 0;
+  background: var(--intro-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+#intro h1 {
+  font-size: 4rem;
+  color: var(--accent);
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+#intro p {
+  opacity: 0.85;
+  margin-bottom: 40px;
+}
+
+#intro button {
+  padding: 14px 44px;
+  border-radius: 30px;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+/* ================= MAIN ================= */
+#main {
+  opacity: 0;
+  text-align: center;
+  padding: 40px 16px 80px;
+}
+
+.show {
+  opacity: 1;
+  animation: fadeUp 1s forwards;
+}
+
+/* ================= TIMER ================= */
+.timer-circle {
+  width: 340px;
+  height: 340px;
+  margin: 30px auto;
+  background: var(--card);
+  border-radius: 50%;
+  border: 6px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.25);
+}
+
+.timer-circle h1 {
+  font-size: 2.2rem;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.4;
+  padding: 20px;
+}
+
+/* ================= SECTION ================= */
+.section-card {
+  max-width: 1000px;
+  margin: 60px auto 0;
+  padding: 30px 20px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  backdrop-filter: blur(6px);
+}
+
+.section-card h2 {
+  margin-bottom: 30px;
+}
+
+/* ================= SUBJECTS ================= */
+.subjects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.subjects label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--card);
+  color: var(--accent);
+  font-weight: 600;
+  border-radius: 14px;
+  border: 2px solid var(--border);
+  transition: 0.25s;
+  cursor: pointer;
+}
+
+.subjects label:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.subjects input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--accent);
+  margin-right: 10px;
+}
+
+/* ================= PROGRESS BAR ================= */
+.progress-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 30px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  margin: 0 auto 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 15px;
+  transition: width 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--card);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ================= TOGGLE ================= */
+.toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: 2px solid var(--border);
+  background: var(--card);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= WATERMARK ================= */
+.watermark {
+  position: fixed;
+  bottom: 15px;
+  right: 20px;
+  opacity: 0.4;
+  font-size: 0.9rem;
+}
+
+/* ================= ANIMATIONS ================= */
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(20px);}
+  to {opacity:1; transform: translateY(0);}
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:500px){
+  .timer-circle {width:240px;height:240px;}
+  .timer-circle h1 {font-size:1.5rem;}
+  #intro h1 {font-size:2.6rem;}
+}
+
+@media(max-width:360px){
+  .subjects { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <h1>By Nazeeh</h1>
+  <p>SSLC 2026 Preparation Portal</p>
+  <button onclick="enter()">Continue</button>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <button class="toggle" onclick="toggle()" aria-label="Toggle Dark/Light Theme">Dark / Light</button>
+
+  <div class="timer-circle">
+    <h1 id="countdown">Loading...</h1>
+  </div>
+
+  <div class="section-card">
+    <h2>SSLC BOARD MODEL QUESTION PAPERS<br>(2025–2026)</h2>
+
+    <div class="subjects">
+      <label><input type="checkbox" class="subject-check" data-subject="Mathematics"> <a href="https://drive.google.com/drive/folders/1i7k1HKnGcD7emLxPJbFZ3ts_ADOFgNn7" target="_blank">Mathematics</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="Physics"> <a href="https://drive.google.com/drive/folders/1749V7hTCj8mbGJfzR1DVM6XP0mhXHMEa" target="_blank">Physics</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="Chemistry"> <a href="https://drive.google.com/drive/folders/1UGoPsydYt9ZlZ--fybBk382cXJyLLThF" target="_blank">Chemistry</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="Biology"> <a href="https://drive.google.com/drive/folders/1P7HgcRHkuoM8_YyD53JupvMymyJ0Krmv" target="_blank">Biology</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="Social Science"> <a href="https://drive.google.com/drive/folders/1dJQI6A278SL5z21ChUutu6jbfRPI678F" target="_blank">Social Science</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="English"> <a href="https://drive.google.com/drive/folders/1CMHh2InBduSDq9qI2sa04nEQ6p-EHoHQ" target="_blank">English</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="Hindi"> <a href="https://drive.google.com/drive/folders/1xxKy85Y5XB5t7UTK9YiokIJOVEW_itTP" target="_blank">Hindi</a></label>
+      <label><input type="checkbox" class="subject-check" data-subject="Malayalam"> <a href="https://drive.google.com/drive/folders/1Pl4e-XOgF8Imv_N9jFGRUbLfhQdNbAq2" target="_blank">Malayalam</a></label>
+    </div>
+
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar">0%</div>
+    </div>
+  </div>
+</div>
+
+<div class="watermark">Made by Nazeeh</div>
+
+<script>
+function enter(){
+  document.getElementById("intro").style.display="none";
+  document.getElementById("main").classList.add("show");
+}
+
+// Dark / Light toggle with persistence
+function toggle(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+}
+
+// Load theme
+if(localStorage.getItem("theme") === "light"){
+  document.body.classList.add("light");
+}
+
+// Timer countdown
+const exam = new Date("March 5, 2026 09:00:00").getTime();
+const el = document.getElementById("countdown");
+
+setInterval(()=>{
+  const now = new Date().getTime();
+  const d = exam - now;
+  if(d<=0){el.innerHTML="EXAM STARTED"; return;}
+  const days=Math.floor(d/(1000*60*60*24));
+  const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const mins=Math.floor((d%(1000*60*60))/(1000*60));
+  const secs=Math.floor((d%(1000*60))/1000);
+  el.innerHTML=`${days} Days<br>${hrs}h ${mins}m ${secs}s`;
+},1000);
+
+// Subject checkboxes & progress
+const checks = document.querySelectorAll(".subject-check");
+const progressBar = document.getElementById("progress-bar");
+
+// Load saved progress
+checks.forEach(chk => {
+  if(localStorage.getItem(chk.dataset.subject) === "true"){
+    chk.checked = true;
+  }
+
+  chk.addEventListener("change", () => {
+    localStorage.setItem(chk.dataset.subject, chk.checked);
+    updateProgress();
+  });
+});
+
+function updateProgress(){
+  const total = checks.length;
+  const checked = [...checks].filter(c => c.checked).length;
+  const percent = Math.round((checked/total)*100);
+  progressBar.style.width = percent + "%";
+  progressBar.innerText = percent + "%"; // show percentage inside
+}
+
+// Initial progress
+updateProgress();
+</script>
+
+</body>
+</html>
