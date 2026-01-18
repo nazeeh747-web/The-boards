@@ -302,18 +302,26 @@ setInterval(()=>{
   el.innerHTML=`${days} Days<br>${hrs}h ${mins}m ${secs}s`;
 },1000);
 
+// ---------------- USER PROGRESS SAVING ----------------
+
+// Generate unique user ID if none exists
+if(!localStorage.getItem("sslcUserID")){
+  const uid = 'user-' + Date.now() + '-' + Math.floor(Math.random()*1000);
+  localStorage.setItem("sslcUserID", uid);
+}
+const userID = localStorage.getItem("sslcUserID");
+
 // Subject checkboxes & progress
 const checks = document.querySelectorAll(".subject-check");
 const progressBar = document.getElementById("progress-bar");
 
-// Load saved progress
+// Load saved progress for this user
 checks.forEach(chk => {
-  if(localStorage.getItem(chk.dataset.subject) === "true"){
-    chk.checked = true;
-  }
+  const saved = localStorage.getItem(userID + "-" + chk.dataset.subject);
+  if(saved === "true") chk.checked = true;
 
   chk.addEventListener("change", () => {
-    localStorage.setItem(chk.dataset.subject, chk.checked);
+    localStorage.setItem(userID + "-" + chk.dataset.subject, chk.checked);
     updateProgress();
   });
 });
